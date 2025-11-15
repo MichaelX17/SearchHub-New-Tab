@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "SearchHub New Tab",
+  "version": "1.0.0",
+  "description": "A Chromium extension that replaces your default new tab page with a sleek, unified search form for many popular search engines.",
+  "icons": {
+    "16": "resources/favicon.png",
+    "48": "resources/favicon.png",
+    "128": "resources/favicon.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}
