@@ -81,3 +81,31 @@ window.addEventListener('keydown', e => {
     input.focus();
   }
 });
+
+// Theme toggle: persists choice in localStorage (default: dark)
+const themeBtn = document.getElementById('themeToggle');
+function applyTheme(theme) {
+  if (!themeBtn) return;
+  if (theme === 'light') {
+    document.documentElement.classList.add('light-theme');
+    themeBtn.textContent = '☀️';
+    themeBtn.setAttribute('aria-pressed', 'true');
+    document.documentElement.style.setProperty('--bg-image', "url('../resources/background_white.jpg')");
+  } else {
+    document.documentElement.classList.remove('light-theme');
+    themeBtn.textContent = '🌙';
+    themeBtn.setAttribute('aria-pressed', 'false');
+    document.documentElement.style.setProperty('--bg-image', "url('../resources/background_dark.jpg')");
+  }
+  try { localStorage.setItem('theme', theme); } catch (e) { /* ignore */ }
+}
+
+if (themeBtn) {
+  const saved = localStorage.getItem('theme') || 'dark';
+  applyTheme(saved);
+
+  themeBtn.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.contains('light-theme');
+    applyTheme(isLight ? 'dark' : 'light');
+  });
+}

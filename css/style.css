@@ -20,7 +20,7 @@ html::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../resources/background.jpg');
+  background-image: var(--bg-image, url('../resources/background_dark.jpg'));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -196,12 +196,83 @@ body {
   transform: translateY(-3px);
 }
 
+/* Theme toggle button (fixed top-right) and light-theme overrides */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10000;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.5);
+  transition: transform .15s ease, background .15s ease;
+  backdrop-filter: blur(6px);
+}
+
+.theme-toggle:hover { transform: translateY(-3px); }
+
+html.light-theme::before {
+  filter: brightness(1.05) saturate(1.02) contrast(1);
+}
+
+body.light-theme {
+  background: linear-gradient(180deg,#f7fafc,#eaf6ff);
+  color: #07203a;
+}
+
+body.light-theme .card {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(2,6,23,0.06);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+  color: inherit;
+}
+
+body.light-theme .description {
+  color: rgba(7,32,58,0.8);
+  text-shadow: none;
+}
+
+body.light-theme input::placeholder {
+  color: rgba(7,32,58,0.45);
+  opacity: 1;
+}
+
+body.light-theme .search-bar {
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 2px 6px rgba(2,6,23,0.06);
+  border: 1px solid rgba(2,6,23,0.04);
+}
+
+body.light-theme .engine-btn img {
+  filter: none;
+}
+
+body.light-theme .theme-toggle {
+  background: rgba(255,255,255,0.9);
+  color: #07203a;
+  border: 1px solid rgba(2,6,23,0.06);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+
 .footer {
   margin-top: 20px;
   color: rgba(230,238,248,0.6);
   font-size: 14px;
   text-align: center;
   text-shadow: 2px 2px 4px #00000080;
+}
+
+input::placeholder {
+  color: #FFFFFF; /* El color que quieras */
+  opacity: 0.7;    /* Importante para Firefox, que le baja la opacidad por defecto */
 }
 
 /* 🌐 Responsive Improvements */
