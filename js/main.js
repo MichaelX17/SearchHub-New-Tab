@@ -90,7 +90,7 @@ function applyTheme(theme) {
     document.documentElement.classList.add('light-theme');
     themeBtn.textContent = '☀️';
     themeBtn.setAttribute('aria-pressed', 'true');
-    document.documentElement.style.setProperty('--bg-image', "url('../resources/background_white.jpg')");
+    document.documentElement.style.setProperty('--bg-image', "url('../resources/background_light.jpg')");
   } else {
     document.documentElement.classList.remove('light-theme');
     themeBtn.textContent = '🌙';
