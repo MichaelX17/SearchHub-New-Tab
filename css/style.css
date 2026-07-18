@@ -1,3 +1,4 @@
+/* ===== RESET Y BASE ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,20 +12,7 @@ html, body {
 html {
   position: relative;
   min-height: 100%;
-}
-
-html::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: var(--bg-image, url('../resources/background_dark.jpg'));
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
+  background: #0a0a0f; /* fondo base (se sobreescribe con JS) */
 }
 
 body {
@@ -32,27 +20,47 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(72,61,139,0.08), transparent),
-              radial-gradient(1000px 500px at 90% 90%, rgba(34,139,230,0.06), transparent),
-              linear-gradient(180deg, rgba(15,23,42,0.85), rgba(7,16,48,0.85));
+  background: transparent;
   color: #e6eef8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 20px;
 }
 
+/* ===== FLARES (manchas animadas) ===== */
+.flare {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  width: 70vmax;
+  height: 70vmax;
+  transition: transform 5s cubic-bezier(0.34, 1.2, 0.64, 1);
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.flare1 {
+  background: radial-gradient(circle, var(--flare1), transparent 70%);
+}
+.flare2 {
+  background: radial-gradient(circle, var(--flare2), transparent 70%);
+}
+
+/* ===== TARJETA ===== */
 .card {
   width: min(960px, 100%);
-  background: rgba(36, 52, 112, 0.11);
-  border: 1px solid rgba(255,255,255,0.04);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 40px;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
   text-align: center;
 }
 
-/* Center helpers */
+/* ===== LOGO ===== */
 .center {
   justify-content: center;
   text-align: center;
@@ -69,7 +77,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;;
+  gap: 8px;
 }
 
 .brand .mark {
@@ -77,29 +85,25 @@ body {
   padding: 0 22px;
   min-height: 60px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #6ee7b7, #60a5fa);
+  background: linear-gradient(135deg, var(--flare1), var(--flare2));
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  color: #07203a;
+  color: #fff;
   font-size: 20px;
   white-space: nowrap;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)
-}
-
-.brand .title {
-  font-size: 22px;
-  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: background 0.5s ease;
 }
 
 .description {
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
-  text-shadow: 2px 2px 4px #00000080;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-
+/* ===== BARRA DE BÚSQUEDA ===== */
 .search-wrap {
   display: flex;
   flex-direction: column;
@@ -112,11 +116,11 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(131, 164, 194, 0.5);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
   padding: 14px 18px;
   border-radius: 12px;
-  border: 1px solid rgba(94, 60, 60, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   width: 100%;
   max-width: 720px;
 }
@@ -125,12 +129,17 @@ body {
   flex: 1;
   background: transparent;
   border: 0;
-  color: inherit;
+  color: #fff;
   font-size: 18px;
   outline: none;
   padding: 6px;
 }
 
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== ICONOS DE MOTORES ===== */
 .search-icons {
   display: flex;
   gap: 10px;
@@ -157,8 +166,8 @@ body {
 }
 
 .engine-btn.active {
-  background: rgba(0, 73, 116, 0.363);
-  border-color: rgba(255, 255, 255, 0.342);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .engine-btn img {
@@ -169,10 +178,7 @@ body {
   filter: brightness(0) invert(1);
 }
 
-.engine-btn img.keep-colors {
-  filter: none;
-}
-
+/* ===== BOTÓN DE BÚSQUEDA ===== */
 .actions {
   display: flex;
   gap: 12px;
@@ -182,133 +188,91 @@ body {
 .search-btn {
   padding: 10px 16px;
   border-radius: 10px;
-  background: linear-gradient(90deg,#60a5fa,#6ee7b7);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);;
-  color: #06203a;
+  background: linear-gradient(90deg, var(--flare1), var(--flare2));
+  color: #fff;
   font-weight: 700;
   border: none;
   cursor: pointer;
   white-space: nowrap;
   transition: all .15s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .search-btn:hover {
   transform: translateY(-3px);
+  filter: brightness(1.1);
 }
 
-/* Theme toggle button (fixed top-right) and light-theme overrides */
-.theme-toggle {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 10000;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  display: inline-flex;
-  align-items: center;
+/* ===== SELECTOR DE PERFILES ===== */
+.profile-selector {
+  display: flex;
   justify-content: center;
-  background: rgba(0,0,0,0.45);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.08);
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.profile-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(2,6,23,0.5);
-  transition: transform .15s ease, background .15s ease;
-  backdrop-filter: blur(6px);
+  background: linear-gradient(135deg, var(--c1) 50%, var(--c2) 50%);
+  transition: all .25s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.theme-toggle:hover { transform: translateY(-3px); }
-
-html.light-theme::before {
-  filter: brightness(1.05) saturate(1.02) contrast(1);
+.profile-btn:hover {
+  transform: scale(1.2);
 }
 
-body.light-theme {
-  background: linear-gradient(180deg,#f7fafc,#eaf6ff);
-  color: #07203a;
+.profile-btn.active {
+  border-color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(255,255,255,0.15);
 }
 
-body.light-theme .card {
-  background: rgba(255,255,255,0.9);
-  border: 1px solid rgba(2,6,23,0.06);
-  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
-  color: inherit;
-}
-
-body.light-theme .description {
-  color: rgba(7,32,58,0.8);
-  text-shadow: none;
-}
-
-body.light-theme input::placeholder {
-  color: rgba(7,32,58,0.45);
-  opacity: 1;
-}
-
-body.light-theme .search-bar {
-  background: rgba(255,255,255,0.7);
-  box-shadow: 0 2px 6px rgba(2,6,23,0.06);
-  border: 1px solid rgba(2,6,23,0.04);
-}
-
-body.light-theme .engine-btn img {
-  filter: none;
-}
-
-body.light-theme .theme-toggle {
-  background: rgba(255,255,255,0.9);
-  color: #07203a;
-  border: 1px solid rgba(2,6,23,0.06);
-  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
-}
-
+/* ===== FOOTER ===== */
 .footer {
   margin-top: 20px;
-  color: rgba(230,238,248,0.6);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 14px;
   text-align: center;
-  text-shadow: 2px 2px 4px #00000080;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-input::placeholder {
-  color: #FFFFFF; /* El color que quieras */
-  opacity: 0.7;    /* Importante para Firefox, que le baja la opacidad por defecto */
-}
-
-/* 🌐 Responsive Improvements */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   body {
     padding: 10px;
   }
-
   .card {
     padding: 24px;
-    width: 100%;
   }
-
   .search-bar {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
     padding: 12px;
   }
-
   .search-icons {
     justify-content: center;
   }
-
   .actions {
     justify-content: center;
   }
-
   .search-bar input[type=text] {
     width: 100%;
     text-align: center;
     font-size: 16px;
   }
-
   .search-btn {
     width: 100%;
+  }
+  .profile-selector {
+    flex-wrap: wrap;
   }
 }
 
@@ -317,20 +281,19 @@ input::placeholder {
     font-size: 18px;
     padding: 0 14px;
   }
-  .brand .title {
-    font-size: 18px;
-  }
   .search-bar {
     max-width: 100%;
   }
-  
   .engine-btn {
     width: 40px;
     height: 40px;
   }
-  
   .engine-btn img {
     width: 20px;
     height: 20px;
+  }
+  .profile-btn {
+    width: 28px;
+    height: 28px;
   }
 }

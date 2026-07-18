@@ -8,11 +8,15 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <button id="themeToggle" class="theme-toggle" aria-label="Toggle background theme" title="Toggle theme" aria-pressed="false">🌙</button>
+  <!-- FLARES (fondo dinámico) -->
+  <div class="flare flare1"></div>
+  <div class="flare flare2"></div>
+
+  <!-- TARJETA PRINCIPAL -->
   <main class="card" role="main">
     <header class="logo-row center">
       <div class="brand center">
-        <div class="mark">SearchHub</div>
+        <div class="mark" id="brandMark">SearchHub</div>
         <div>
           <div class="description">Search everywhere from your new tab</div>
         </div>
@@ -20,39 +24,42 @@
     </header>
 
     <section class="search-wrap">
-  <div class="search-bar" role="search" aria-label="Search bar">
-    <div class="search-icons" id="engineList">
-      <button class="engine-btn" data-engine="youtube" title="YouTube" aria-pressed="false" id="eng-yt">
-        <!-- Icono de YouTube -->
-        <img src="resources/youtube_logo.png" alt="YouTube" aria-hidden="true">
-      </button>
+      <div class="search-bar" role="search" aria-label="Search bar">
+        <div class="search-icons" id="engineList">
+          <button class="engine-btn" data-engine="youtube" title="YouTube" aria-pressed="false" id="eng-yt">
+            <img src="resources/youtube_logo.png" alt="YouTube" aria-hidden="true">
+          </button>
+          <button class="engine-btn" data-engine="google" title="Google" aria-pressed="false" id="eng-google">
+            <img src="resources/google_logo.png" alt="Google" aria-hidden="true">
+          </button>
+          <button class="engine-btn" data-engine="duckduckgo" title="DuckDuckGo" aria-pressed="false" id="eng-duck">
+            <img src="resources/duckduckgo_logo.png" alt="DuckDuckGo" aria-hidden="true">
+          </button>
+          <button class="engine-btn" data-engine="startpage" title="Startpage" aria-pressed="false" id="eng-startpage">
+            <img src="resources/startpage_logo.png" alt="Startpage" aria-hidden="true">
+          </button>
+        </div>
 
-      <button class="engine-btn" data-engine="google" title="Google" aria-pressed="false" id="eng-google">
-        <!-- Icono de Google -->
-        <img src="resources/google_logo.png" alt="Google" aria-hidden="true">
-      </button>
+        <input type="text" id="searchInput" placeholder="Search the web..." aria-label="Search" autocomplete="off" />
 
-      <button class="engine-btn" data-engine="duckduckgo" title="DuckDuckGo" aria-pressed="false" id="eng-duck">
-        <!-- Icono de DuckDuckGo -->
-        <img src="resources/duckduckgo_logo.png" alt="DuckDuckGo" aria-hidden="true">
-      </button>
+        <div class="actions">
+          <button class="search-btn" id="searchBtn">Search</button>
+        </div>
+      </div>
 
-      <button class="engine-btn" data-engine="startpage" title="Startpage" aria-pressed="false" id="eng-startpage">
-        <!-- Icono de Startpage -->
-        <img src="resources/startpage_logo.png" alt="Startpage" aria-hidden="true">
-      </button>
+      <div class="footer center">Select a search engine and type your query. Press Enter or click <strong>Search</strong>.</div>
+    </section>
+
+    <!-- SELECTOR DE PERFILES -->
+    <div class="profile-selector" id="profileSelector">
+      <button class="profile-btn" data-profile="azul-morado" title="Azul & Morado" style="--c1:#1e3a8a; --c2:#7c3aed;"></button>
+      <button class="profile-btn" data-profile="rojo-negro" title="Rojo & Negro" style="--c1:#dc2626; --c2:#111827;"></button>
+      <button class="profile-btn" data-profile="rosa-blanco" title="Rosa & Blanco" style="--c1:#ec4899; --c2:#f3f4f6;"></button>
+      <button class="profile-btn" data-profile="verde-azul" title="Verde & Azul" style="--c1:#059669; --c2:#38bdf8;"></button>
+      <button class="profile-btn" data-profile="naranja-amarillo" title="Naranja & Amarillo" style="--c1:#ea580c; --c2:#facc15;"></button>
     </div>
-
-    <input type="text" id="searchInput" placeholder="Search the web..." aria-label="Search" autocomplete="off" />
-
-    <div class="actions">
-      <button class="search-btn" id="searchBtn">Search</button>
-    </div>
-  </div>
-
-  <div class="footer center">Select a search engine and type your query. Press Enter or click <strong>Search</strong>.</div>
-</section>
   </main>
+
   <script src="js/main.js"></script>
 </body>
 </html>
