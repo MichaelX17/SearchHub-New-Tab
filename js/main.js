@@ -1,37 +1,37 @@
-// ===== PERFILES DE COLOR =====
+// ===== COLOR PROFILES =====
 const profiles = {
-  'azul-morado': {
+  'blue-purple': {
     flare1: '#1e3a8a',
     flare2: '#7c3aed',
     bg: '#0a0a1a'
   },
-  'rojo-negro': {
+  'red-black': {
     flare1: '#dc2626',
     flare2: '#111827',
     bg: '#1a0a0a'
   },
-  'rosa-blanco': {
+  'pink-white': {
     flare1: '#ec4899',
     flare2: '#f3f4f6',
     bg: '#1a0a14'
   },
-  'verde-azul': {
+  'green-blue': {
     flare1: '#059669',
     flare2: '#38bdf8',
     bg: '#0a1a0a'
   },
-  'naranja-amarillo': {
+  'orange-yellow': {
     flare1: '#ea580c',
     flare2: '#facc15',
     bg: '#1a100a'
   }
 };
 
-// Estado actual
-let currentProfile = 'azul-morado';
-const defaultProfile = 'azul-morado';
+// Current state
+let currentProfile = 'blue-purple';
+const defaultProfile = 'blue-purple';
 
-// Elementos del DOM
+// DOM elements
 const root = document.documentElement;
 const flare1 = document.querySelector('.flare1');
 const flare2 = document.querySelector('.flare2');
@@ -39,43 +39,42 @@ const profileBtns = document.querySelectorAll('.profile-btn');
 const brandMark = document.getElementById('brandMark');
 const searchBtn = document.getElementById('searchBtn');
 
-// ===== APLICAR PERFIL =====
+// ===== APPLY PROFILE =====
 function applyProfile(profileName) {
   const profile = profiles[profileName];
   if (!profile) return;
 
   currentProfile = profileName;
 
-  // Colores de los flares
+  // Flare colors
   root.style.setProperty('--flare1', profile.flare1);
   root.style.setProperty('--flare2', profile.flare2);
 
-  // Fondo de la página
+  // Page background
   root.style.background = profile.bg;
 
-  // Actualizar el logo (gradiente)
+  // Update logo gradient
   brandMark.style.background = `linear-gradient(135deg, ${profile.flare1}, ${profile.flare2})`;
 
-  // Actualizar botón de búsqueda
+  // Update search button
   searchBtn.style.background = `linear-gradient(90deg, ${profile.flare1}, ${profile.flare2})`;
 
-  // Activar botón correspondiente en el selector
+  // Toggle active class on profile buttons
   profileBtns.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.profile === profileName);
   });
 
-  // Guardar preferencia
+  // Save preference
   try {
     localStorage.setItem('selectedProfile', profileName);
   } catch (e) { /* ignore */ }
 }
 
-// ===== MOVIMIENTO ALEATORIO DE FLARES =====
+// ===== RANDOM FLARE MOVEMENT =====
 function moveFlares() {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
 
-  // Rango de movimiento: -30% a +30% del viewport en X e Y
   const rangeX = vw * 0.3;
   const rangeY = vh * 0.3;
 
@@ -90,35 +89,33 @@ function moveFlares() {
   flare2.style.transform = `translate(${x2}px, ${y2}px)`;
 }
 
-// ===== INICIALIZAR =====
-// Cargar perfil guardado
+// ===== INITIALIZATION =====
+// Load saved profile
 let savedProfile = localStorage.getItem('selectedProfile');
 if (!savedProfile || !profiles[savedProfile]) {
   savedProfile = defaultProfile;
 }
 applyProfile(savedProfile);
 
-// Mover flares al inicio y luego cada 5 segundos
+// Initial flare movement and interval
 moveFlares();
 setInterval(moveFlares, 5000);
 
-// Recalcular al redimensionar (para ajustar rangos)
+// Recalculate on resize
 window.addEventListener('resize', moveFlares);
 
-// ===== SELECTOR DE PERFILES =====
+// ===== PROFILE SELECTOR EVENTS =====
 profileBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     const profile = btn.dataset.profile;
     if (profile && profiles[profile]) {
       applyProfile(profile);
-      // Reiniciamos la posición de los flares para que se muevan desde su posición actual
-      // pero como la transición es suave, simplemente forzamos un nuevo movimiento después de un breve delay
       setTimeout(moveFlares, 100);
     }
   });
 });
 
-// ===== LÓGICA DE BÚSQUEDA (EXISTENTE) =====
+// ===== SEARCH ENGINE LOGIC (unchanged) =====
 const engines = {
   youtube: {
     name: 'YouTube',
@@ -190,7 +187,7 @@ searchBtnAction.addEventListener('click', e => {
   doSearch();
 });
 
-// Atajo Ctrl/Cmd + K
+// Shortcut: Ctrl/Cmd + K
 window.addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault();

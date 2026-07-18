@@ -1,4 +1,4 @@
-/* ===== RESET Y BASE ===== */
+/* ===== RESET & BASE ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,7 +12,7 @@ html, body {
 html {
   position: relative;
   min-height: 100%;
-  background: #0a0a0f; /* fondo base (se sobreescribe con JS) */
+  background: #0a0a0f; /* fallback, overridden by JS */
 }
 
 body {
@@ -27,7 +27,7 @@ body {
   padding: 20px;
 }
 
-/* ===== FLARES (manchas animadas) ===== */
+/* ===== FLARE ANIMATIONS ===== */
 .flare {
   position: fixed;
   border-radius: 50%;
@@ -48,7 +48,7 @@ body {
   background: radial-gradient(circle, var(--flare2), transparent 70%);
 }
 
-/* ===== TARJETA ===== */
+/* ===== CARD ===== */
 .card {
   width: min(960px, 100%);
   background: rgba(0, 0, 0, 0.25);
@@ -103,7 +103,7 @@ body {
   text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-/* ===== BARRA DE BÚSQUEDA ===== */
+/* ===== SEARCH BAR ===== */
 .search-wrap {
   display: flex;
   flex-direction: column;
@@ -139,7 +139,7 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* ===== ICONOS DE MOTORES ===== */
+/* ===== ENGINE ICONS ===== */
 .search-icons {
   display: flex;
   gap: 10px;
@@ -178,7 +178,7 @@ body {
   filter: brightness(0) invert(1);
 }
 
-/* ===== BOTÓN DE BÚSQUEDA ===== */
+/* ===== SEARCH BUTTON ===== */
 .actions {
   display: flex;
   gap: 12px;
@@ -203,7 +203,7 @@ body {
   filter: brightness(1.1);
 }
 
-/* ===== SELECTOR DE PERFILES ===== */
+/* ===== PROFILE SELECTOR (fixed) ===== */
 .profile-selector {
   display: flex;
   justify-content: center;
@@ -217,11 +217,13 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid transparent;
+  border: none;
   cursor: pointer;
   background: linear-gradient(135deg, var(--c1) 50%, var(--c2) 50%);
   transition: all .25s ease;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .profile-btn:hover {
@@ -229,9 +231,8 @@ body {
 }
 
 .profile-btn.active {
-  border-color: #fff;
+  box-shadow: 0 0 0 2px #fff, 0 0 20px rgba(255,255,255,0.2);
   transform: scale(1.15);
-  box-shadow: 0 0 20px rgba(255,255,255,0.15);
 }
 
 /* ===== FOOTER ===== */
